@@ -32,18 +32,42 @@ public class Controller {
     }
     public void update(){
         for(Bug b :bugList){
-            gContex.fillOval(b.xPos, b.yPos, 30, 30);
+            gContex.fillOval(b.xPos, b.yPos, Var.bugSize, Var.bugSize);
         }
-        // for bug in bugs create circle. jeder circle hat die position vom bug. Jeder Bug wird da gezeichnet wo er hin soll.
         hunter.lvl += 1;
         bugFrequency += 2;
         System.out.println(Arrays.toString(bugList));
     }
 
     public void bugs(){
+        Var.bugX = 0;
+        Var.bugY = 0;
         bugList = new Bug[bugFrequency];
         for(int  i = 0; i<bugFrequency; i++){
-         bugList[i] = new Bug(rand.nextInt(600), rand.nextInt(400));
+            startSide();
+         bugList[i] = new Bug(Var.bugX, Var.bugY);
+        }
+    }
+    public void startSide(){
+        int boundSize = (int) (canvas.getHeight() - Var.bugSize);
+        int sideValue = rand.nextInt(4);
+        System.out.println(sideValue);
+
+        if(sideValue == 0){
+            Var.bugX = 0;
+            Var.bugY = rand.nextInt(boundSize);
+        }
+        if(sideValue == 1){
+            Var.bugX = boundSize;
+            Var.bugY= rand.nextInt(boundSize);
+        }
+        if (sideValue == 2){
+            Var.bugY = 0;
+            Var.bugX = rand.nextInt(boundSize);
+        }
+        if (sideValue == 3){
+            Var.bugY = boundSize;
+            Var.bugX = rand.nextInt(boundSize);
         }
     }
 }
