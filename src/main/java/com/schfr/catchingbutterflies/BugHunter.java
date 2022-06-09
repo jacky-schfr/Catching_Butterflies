@@ -1,14 +1,15 @@
 package com.schfr.catchingbutterflies;
 
 public class BugHunter {
-    int locationX, locationY, netAnkle, runningSpeed, points, lvl;
+    int locationX, locationY, netAngle, runningSpeed, points, lvl;
 
 
     public BugHunter(int x, int y) {
         locationX = x;
         locationY = y;
-        netAnkle = 0;
+        netAngle = 0;
         points = 0;
+        runningSpeed = 10;
         lvl = 0;
     }
 

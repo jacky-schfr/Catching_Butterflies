@@ -22,6 +22,8 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
 
+        scene.setOnKeyPressed(controller::setKeypressend);
+
         controller.start();
         AnimationTimer timer = new AnimationTimer() {
             @Override
