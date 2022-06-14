@@ -19,7 +19,7 @@
             <Group AnchorPane.bottomAnchor="93.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Line endX="86.0" endY="40.5" startX="86.0" startY="-52.0" />
-                  <Arc fx:id="netShape" fill="YELLOW" layoutX="88.0" layoutY="-32.0" length="180.0" radiusX="20.0" radiusY="20.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="CHORD" />
+                  <Arc fx:id="meshNet" fill="YELLOW" layoutX="88.0" layoutY="-32.0" length="180.0" radiusX="20.0" radiusY="20.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" type="CHORD" />
                </children>
             </Group>
          </children>

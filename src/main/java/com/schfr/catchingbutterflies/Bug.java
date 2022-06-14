@@ -10,5 +10,6 @@ public class Bug {
         xPos = x;
         yPos = y;
         flyingSpeed = r.nextInt(1, 3);
+//        flyingSpeed = 0;
     }
 }

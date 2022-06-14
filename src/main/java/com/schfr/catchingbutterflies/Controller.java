@@ -14,7 +14,7 @@ import java.util.Random;
 public class Controller {
 
     public Group Char;
-    public Arc netShape;
+    public Arc meshNet;
     public AnchorPane Net;
     int bugFrequency;
 
@@ -61,6 +61,7 @@ public class Controller {
         Char.setLayoutY(hunter.locationY);
         Net.setLayoutX(hunter.locationX + 60);
         Net.setLayoutY(hunter.locationY - 50);
+        catchingBugs();
         hunter.lvl += 1;
         bugFrequency += 2;
     }
@@ -113,13 +114,22 @@ public class Controller {
     public void netDirection(MouseEvent mouseEvent) {
         hunter.netAngle = (int) calculateAngle(Net.getLayoutX(), Net.getLayoutY()+80, mouseEvent.getX(), mouseEvent.getY());
         Net.setRotate(hunter.netAngle);
-        System.out.println(hunter.netAngle);
     }
-    public static double calculateAngle(double x1, double y1, double x2, double y2){
+    public double calculateAngle(double x1, double y1, double x2, double y2){
         double angle = Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
         angle = angle + Math.ceil( -angle / 360 ) * 360;
         angle += 90;
 
         return angle;
     }
+    public void catchingBugs(){
+        for (Bug b : bugList){
+            if(meshNet.getParent().getParent().getBoundsInParent().intersects(b.xPos, b.yPos, Var.bugSize, Var.bugSize)){
+                System.out.println("Pooop");
+                hunter.points += 1;
+            }
+        }
+        System.out.println(hunter.points);
+    }
+
 }
