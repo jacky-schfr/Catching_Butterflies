@@ -2,6 +2,7 @@
 
 <?import javafx.scene.*?>
 <?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
@@ -9,14 +10,16 @@
    <children>
       <Group fx:id="Char" layoutX="220.0" layoutY="180.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="11.0" layoutX="20.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-            <Circle fill="White" layoutX="20.0" layoutY="24.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView>
+               <image>
+                  <Image url="@images/hunter.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
-      <AnchorPane fx:id="Net" layoutX="275.0" layoutY="125.0" prefHeight="183.0" prefWidth="40.0">
+      <AnchorPane fx:id="Net" layoutX="263.0" layoutY="114.0">
          <children>
-            <Group AnchorPane.bottomAnchor="93.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+            <Group AnchorPane.bottomAnchor="89.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Line endX="86.0" endY="40.5" startX="86.0" startY="-52.0" />
                   <Arc fx:id="meshNet" fill="YELLOW" layoutX="88.0" layoutY="-32.0" length="180.0" radiusX="20.0" radiusY="20.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" type="CHORD" />

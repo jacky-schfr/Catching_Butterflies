@@ -3,7 +3,7 @@ package com.schfr.catchingbutterflies;
 public class Var {
     public static long currentTime;
     public static long lvlTimer, bugTimer;
-    static int bugX, bugY, bugSize = 30;
+    static int bugX, bugY, bugSize = 30, bugNum, minSpeed, maxSpeed;
 
 
 

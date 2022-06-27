@@ -7,8 +7,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
+import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Controller {
@@ -16,11 +19,10 @@ public class Controller {
     public Group Char;
     public Arc meshNet;
     public AnchorPane Net;
-    int bugFrequency;
 
     Random rand = new Random();
 
-    Bug[] bugList;
+    ArrayList<Bug> bugList = new ArrayList<>();
     BugHunter hunter;
     public Canvas canvas;
     public GraphicsContext gContex;
@@ -28,11 +30,14 @@ public class Controller {
     public void start() {
         gContex = canvas.getGraphicsContext2D();
         hunter = new BugHunter((int) Char.getLayoutX(), (int) Char.getLayoutY());
-        bugFrequency = 3;
+        Var.bugNum = 3;
+        Var.minSpeed = 1;
+        Var.maxSpeed = 3;
         bugs();
     }
 
     public void update() {
+        System.out.println(meshNet.getScaleX());
         gContex.clearRect(0, 0, canvas.getHeight(), canvas.getWidth());;
         for (Bug b : bugList) {
             gContex.fillOval(b.xPos, b.yPos, Var.bugSize, Var.bugSize);
@@ -59,16 +64,14 @@ public class Controller {
         }
         Char.setLayoutX(hunter.locationX);
         Char.setLayoutY(hunter.locationY);
-        Net.setLayoutX(hunter.locationX + 60);
-        Net.setLayoutY(hunter.locationY - 50);
+        Net.setLayoutX(hunter.locationX + 45);
+        Net.setLayoutY(hunter.locationY - 63);
         catchingBugs();
-        hunter.lvl += 1;
-        bugFrequency += 2;
+
     }
 
     public void bugs() {
-        bugList = new Bug[bugFrequency];
-        for (int i = 0; i < bugFrequency; i++) {
+        for (int i = 0; i < Var.bugNum; i++) {
             bugPosition(i);
         }
     }
@@ -93,8 +96,8 @@ public class Controller {
             Var.bugY = boundSize;
             Var.bugX = rand.nextInt(boundSize);
         }
-        bugList[i] = new Bug(Var.bugX, Var.bugY);
-        bugList[i].randomPos = sideValue;
+        bugList.add(i, new Bug(Var.bugX, Var.bugY, Var.minSpeed, Var.maxSpeed));
+        bugList.get(i).randomPos = sideValue;
     }
     public void setKeypressend(KeyEvent e){
         if (e.getCode() == KeyCode.W){
@@ -123,13 +126,29 @@ public class Controller {
         return angle;
     }
     public void catchingBugs(){
+        ArrayList <Bug> bugIndex = new ArrayList<>();
+        Rectangle newNet = new Rectangle(Net.getWidth()/2, Net.getHeight()/4);
+        newNet.setX(Net.getLayoutX());
+        newNet.setY(Net.getLayoutY());
         for (Bug b : bugList){
-            if(meshNet.getParent().getParent().getBoundsInParent().intersects(b.xPos, b.yPos, Var.bugSize, Var.bugSize)){
-                System.out.println("Pooop");
-                hunter.points += 1;
+            if(newNet.intersects(b.xPos, b.yPos, Var.bugSize, Var.bugSize)){
+                bugIndex.add(b);
+                hunter.bugCatch +=1;
+            }
+            if (!canvas.intersects(b.xPos, b.yPos, Var.bugSize, Var.bugSize)){
+                bugIndex.add(b);
             }
         }
-        System.out.println(hunter.points);
-    }
+        if (!bugIndex.isEmpty()){
+            for (Bug b : bugIndex){
+                bugList.remove(b);
+            }
+            bugIndex.clear();
+        }
+        if (bugList.isEmpty()){
+            hunter.lvlUp();
+            bugs();
 
+        }
+    }
 }
